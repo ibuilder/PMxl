@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PMxl - Project Management Excel Tools</title>
+    <!-- Bootstrap CSS from CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .section-padding {
+            padding: 80px 0;
+        }
+        .bg-light-gray {
+            background-color: #f8f9fa;
+        }
+        .card {
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+            height: 100%;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .card-img-top {
+            height: 180px;
+            object-fit: cover;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #6c757d;
+        }
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+        }
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+        }
+        .step-box {
+            border-left: 3px solid #0d6efd;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar">
+    <!-- Navigation -->
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-table me-2"></i>PMxl</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#overview">Overview</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#setup">Setup</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#python">Python Scripts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#vba">VBA Modules</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#excel">Excel Files</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero text-center">
+        <div class="container">
+            <h1 class="display-4">PMxl</h1>
+            <p class="lead">A comprehensive collection of Python scripts and VBA code for generating professional construction and project management Excel templates.</p>
+            <a href="#setup" class="btn btn-primary btn-lg mt-3">Get Started</a>
+            <a href="https://github.com/yourusername/PMxl" target="_blank" class="btn btn-outline-light btn-lg mt-3 ms-2">
+                <i class="fab fa-github me-2"></i>GitHub
+            </a>
+        </div>
+    </header>
+
+    <!-- Overview Section -->
+    <section id="overview" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="mb-4">Project Overview</h2>
+                    <p class="lead">PMxl provides ready-to-use Excel templates for construction and project management professionals. The repository includes Python scripts that generate sophisticated Excel files for various project management needs, as well as VBA modules that enhance Excel functionality for specific project management tasks.</p>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-file-code fa-3x text-primary mb-3"></i>
+                        <h4>Python Scripts</h4>
+                        <p>Automate the creation of complex Excel templates with our Python scripts</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-cogs fa-3x text-primary mb-3"></i>
+                        <h4>VBA Modules</h4>
+                        <p>Enhance Excel functionality with custom VBA modules for project management</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-table fa-3x text-primary mb-3"></i>
+                        <h4>Excel Templates</h4>
+                        <p>Ready-to-use professional Excel templates for construction management</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Setup Section -->
+    <section id="setup" class="section-padding bg-light-gray">
+        <div class="container">
+            <h2 class="text-center mb-5">Getting Started</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h4>Project Structure</h4>
+                    <pre><code>PMxl/
+├── py/                 # Python scripts for generating Excel templates
+├── vba/                # VBA code modules for Excel functionality
+├── xl/                 # Generated Excel files (output directory)
+├── run_scripts.py      # Script to execute all Python generators
+└── requirements.txt    # Python dependencies</code></pre>
+                    
+                    <h4 class="mt-4">Requirements</h4>
+                    <ul class="list-group mb-4">
+                        <li class="list-group-item">Python 3.8 or higher</li>
+                        <li class="list-group-item">Required Python packages: openpyxl, pandas</li>
+                    </ul>
+                    
+                    <h4>Installation Steps</h4>
+                    <div class="step-box">
+                        <h5>1. Clone the repository</h5>
+                        <pre><code>git clone [repository-url]
+cd PMxl</code></pre>
+                    </div>
+                    
+                    <div class="step-box">
+                        <h5>2. Install required Python packages</h5>
+                        <pre><code>pip install -r requirements.txt</code></pre>
+                    </div>
+                    
+                    <div class="step-box">
+                        <h5>3. Run the scripts to generate Excel files</h5>
+                        <pre><code>python run_scripts.py</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Python Scripts Section -->
+    <section id="python" class="section-padding">
+        <div class="container">
+            <h2 class="text-center mb-5">Python Scripts</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto mb-5">
+                    <p>All Python scripts are located in the <code>/py</code> folder. To run all scripts at once:</p>
+                    <pre><code>python run_scripts.py</code></pre>
+                    <p>This will execute all Python generators and save the resulting Excel files to the <code>/xl</code> folder.</p>
+                    
+                    <p>To run an individual script:</p>
+                    <pre><code>python py/[script-name].py</code></pre>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">subcontractor_payment_app_python.py</h5>
+                            <p class="card-text">Creates a detailed subcontractor payment application form with calculation fields.</p>
+                            <hr>
+                            <h6>Key Features:</h6>
+                            <ul>
+                                <li>Comprehensive payment application form</li>
+                                <li>Automated calculations for totals and retainage</li>
+                                <li>Professional formatting for printing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">python-submittal-excel.py</h5>
+                            <p class="card-text">Generates a construction submittal tracking workbook with log and templates.</p>
+                            <hr>
+                            <h6>Key Features:</h6>
+                            <ul>
+                                <li>Submittal log with status tracking</li>
+                                <li>Package templates for organization</li>
+                                <li>Item form for detailed documentation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mt-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">meeting_workbook_python.py</h5>
+                            <p class="card-text">Produces a meeting management workbook with agenda, minutes, and log sheets.</p>
+                            <hr>
+                            <h6>Key Features:</h6>
+                            <ul>
+                                <li>Meeting log for tracking all project meetings</li>
+                                <li>Agenda template with action items</li>
+                                <li>Minutes template with attendance tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mt-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">construction-schedule-python.py</h5>
+                            <p class="card-text">Creates a Gantt chart-based construction schedule workbook.</p>
+                            <hr>
+                            <h6>Key Features:</h6>
+                            <ul>
+                                <li>Visual Gantt chart for timeline tracking</li>
+                                <li>Task dependencies and critical path</li>
+                                <li>Resource allocation tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mt-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">construction-rfi-python.py</h5>
+                            <p class="card-text">Generates an RFI (Request for Information) log and form.</p>
+                            <hr>
+                            <h6>Key Features:</h6>
+                            <ul>
+                                <li>Comprehensive RFI tracking system</li>
+                                <li>Status monitoring and reporting</li>
+                                <li>Response time analytics</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mt-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">construction-permit-python.py</h5>
+                            <p class="card-text">Creates a permit tracking log with application forms.</p>
+                            <hr>
+                            <h6>Key Features:</h6>
+                            <ul>
+                                <li>Permit application tracking</li>
+                                <li>Expiration date monitoring</li>
+                                <li>Inspection scheduling</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mt-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">construction-budget-python.py</h5>
+                            <p class="card-text">Produces a comprehensive budget tracking workbook with forecasting.</p>
+                            <hr>
+                            <h6>Key Features:</h6>
+                            <ul>
+                                <li>Budget planning and tracking</li>
+                                <li>Cost forecasting and projections</li>
+                                <li>Visual dashboards and reports</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mt-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">construction-bidding-excel-generator.py</h5>
+                            <p class="card-text">Creates bidding documents including prequalification forms.</p>
+                            <hr>
+                            <h6>Key Features:</h6>
+                            <ul>
+                                <li>Prequalification forms</li>
+                                <li>Bid comparison analysis</li>
+                                <li>Vendor evaluation tools</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mt-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">construction_safety_program_python.py</h5>
+                            <p class="card-text">Generates safety program documentation and checklists.</p>
+                            <hr>
+                            <h6>Key Features:</h6>
+                            <ul>
+                                <li>Safety inspection forms</li>
+                                <li>Incident reporting templates</li>
+                                <li>Compliance tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mt-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">construction_daily_report_generator.py</h5>
+                            <p class="card-text">Creates daily report templates with dashboard and analytics.</p>
+                            <hr>
+                            <h6>Key Features:</h6>
+                            <ul>
+                                <li>Daily progress tracking</li>
+                                <li>Weather and condition logging</li>
+                                <li>Labor and equipment reporting</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VBA Modules Section -->
+    <section id="vba" class="section-padding bg-light-gray">
+        <div class="container">
+            <h2 class="text-center mb-5">VBA Modules</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto mb-5">
+                    <p>The VBA modules in the <code>/vba</code> folder enhance Excel functionality for specific project management tasks.</p>
+                    
+                    <h4>How to Use VBA Modules:</h4>
+                    <ol class="list-group list-group-numbered mb-4">
+                        <li class="list-group-item">Open the Excel file where you want to use the VBA code</li>
+                        <li class="list-group-item">Press Alt+F11 to open the VBA editor</li>
+                        <li class="list-group-item">Right-click on "VBAProject" in the Project Explorer</li>
+                        <li class="list-group-item">Select "Import File..."</li>
+                        <li class="list-group-item">Navigate to the <code>/vba</code> folder and select the desired module</li>
+                    </ol>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i> Note: You may need to enable macros in Excel to use the VBA functionality.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12 text-center mb-4">
+                    <p class="lead">VBA modules documentation would be listed here based on the actual modules in your project.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Excel Files Section -->
+    <section id="excel" class="section-padding">
+        <div class="container">
+            <h2 class="text-center mb-5">Generated Excel Files</h2>
+            <p class="text-center mb-5">All generated Excel files are saved to the <code>/xl</code> folder. Below is a gallery of the generated files and their descriptions.</p>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-img-top d-flex align-items-center justify-content-center">
+                            <i class="fas fa-file-excel text-success"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Subcontractor Payment Application</h5>
+                            <p class="card-text">Comprehensive payment application form with calculation fields for tracking subcontractor payments.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Preview</a>
+                            <a href="xl/Subcontractor_Payment_Application.xlsx" class="btn btn-primary btn-sm" download>Download</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-img-top d-flex align-items-center justify-content-center">
+                            <i class="fas fa-file-excel text-success"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Construction Submittal Workbook</h5>
+                            <p class="card-text">Complete submittal tracking system with logs and templates for managing project submittals.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Preview</a>
+                            <a href="xl/Construction_Submittal_Workbook.xlsx" class="btn btn-primary btn-sm" download>Download</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-img-top d-flex align-items-center justify-content-center">
+                            <i class="fas fa-file-excel text-success"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Meeting Management Workbook</h5>
+                            <p class="card-text">Meeting planning and documentation tool with agenda, minutes, and log sheets.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Preview</a>
+                            <a href="xl/Meeting_Management_Workbook.xlsx" class="btn btn-primary btn-sm" download>Download</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-img-top d-flex align-items-center justify-content-center">
+                            <i class="fas fa-file-excel text-success"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Construction Project Schedule</h5>
+                            <p class="card-text">Gantt chart-based project schedule tracker for visualizing project timelines.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Preview</a>
+                            <a href="xl/Construction_Project_Schedule.xlsx" class="btn btn-primary btn-sm" download>Download</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-img-top d-flex align-items-center justify-content-center">
+                            <i class="fas fa-file-excel text-success"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">RFI Log and Form</h5>
+                            <p class="card-text">Request for Information tracking system with analytics and response monitoring.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Preview</a>
+                            <a href="xl/RFI_Log_and_Form.xlsx" class="btn btn-primary btn-sm" download>Download</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-img-top d-flex align-items-center justify-content-center">
+                            <i class="fas fa-file-excel text-success"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Construction Permit Log</h5>
+                            <p class="card-text">Permit application and tracking system for monitoring regulatory compliance.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Preview</a>
+                            <a href="xl/Construction_Permit_Log.xlsx" class="btn btn-primary btn-sm" download>Download</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-img-top d-flex align-items-center justify-content-center">
+                            <i class="fas fa-file-excel text-success"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Construction Budget Workbook</h5>
+                            <p class="card-text">Budget planning and tracking with forecasting for financial management.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Preview</a>
+                            <a href="xl/Construction_Budget_Workbook.xlsx" class="btn btn-primary btn-sm" download>Download</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-img-top d-flex align-items-center justify-content-center">
+                            <i class="fas fa-file-excel text-success"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Construction Bidding Workbook</h5>
+                            <p class="card-text">Complete bidding documentation package for vendor selection and evaluation.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Preview</a>
+                            <a href="xl/Construction_Bidding_Workbook.xlsx" class="btn btn-primary btn-sm" download>Download</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-img-top d-flex align-items-center justify-content-center">
+                            <i class="fas fa-file-excel text-success"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Construction Safety Program</h5>
+                            <p class="card-text">Safety documentation and checklist system for maintaining site safety.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Preview</a>
+                            <a href="xl/Construction_Safety_Program.xlsx" class="btn btn-primary btn-sm" download>Download</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-img-top d-flex align-items-center justify-content-center">
+                            <i class="fas fa-file-excel text-success"></i>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Construction Daily Report</h5>
+                            <p class="card-text">Daily report system with dashboard and analytics for progress tracking.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Preview</a>
+                            <a href="xl/Construction_Daily_Report.xlsx" class="btn btn-primary btn-sm" download>Download</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-table me-2"></i>PMxl</h5>
+                    <p>A comprehensive collection of Python scripts and VBA code for generating professional construction and project management Excel templates.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#overview" class="text-white">Overview</a></li>
+                        <li><a href="#setup" class="text-white">Setup</a></li>
+                        <li><a href="#python" class="text-white">Python Scripts</a></li>
+                        <li><a href="#vba" class="text-white">VBA Modules</a></li>
+                        <li><a href="#excel" class="text-white">Excel Files</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Connect</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="https://github.com/yourusername/PMxl" class="text-white"><i class="fab fa-github me-2"></i>GitHub</a></li>
+                        <li><a href="mailto:your.email@example.com" class="text-white"><i class="fas fa-envelope me-2"></i>Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <p>&copy; 2025 PMxl. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

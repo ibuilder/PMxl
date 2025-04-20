@@ -1,0 +1,436 @@
+import openpyxl
+from openpyxl.styles import Alignment, Font, Border, Side
+from openpyxl.utils import get_column_letter
+
+
+def create_subcontractor_payment_app():
+    # Create a new workbook
+    wb = openpyxl.Workbook()
+    
+    # Remove the default sheet
+    default_sheet = wb.active
+    wb.remove(default_sheet)
+    
+    # ========== MAIN APPLICATION FORM ==========
+    ws = wb.create_sheet("Payment Application")
+    
+    # Add data to the sheet
+    application_data = [
+        ['SUBCONTRACTOR PAYMENT APPLICATION', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['Project Name:', '', '', 'Application No.:', '', '', ''],
+        ['Project Address:', '', '', 'Period From:', '', '', ''],
+        ['', '', '', 'Period To:', '', '', ''],
+        ['Subcontractor:', '', '', 'Contract No.:', '', '', ''],
+        ['Address:', '', '', 'Contract Date:', '', '', ''],
+        ['Phone:', '', '', 'Contract Amount:', '$', '', ''],
+        ['Email:', '', '', 'Change Orders:', '$', '', ''],
+        ['', '', '', 'Revised Contract:', '$', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['PAYMENT APPLICATION SUMMARY', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['', 'Original Contract', 'Change Orders', 'Revised Contract', 'Previous Billing', 'Current Billing', 'Total to Date'],
+        ['1. General Conditions', '', '', '', '', '', ''],
+        ['2. Site Work', '', '', '', '', '', ''],
+        ['3. Concrete', '', '', '', '', '', ''],
+        ['4. Masonry', '', '', '', '', '', ''],
+        ['5. Metals', '', '', '', '', '', ''],
+        ['6. Wood & Plastics', '', '', '', '', '', ''],
+        ['7. Thermal & Moisture', '', '', '', '', '', ''],
+        ['8. Doors & Windows', '', '', '', '', '', ''],
+        ['9. Finishes', '', '', '', '', '', ''],
+        ['10. Specialties', '', '', '', '', '', ''],
+        ['11. Equipment', '', '', '', '', '', ''],
+        ['12. Furnishings', '', '', '', '', '', ''],
+        ['13. Special Construction', '', '', '', '', '', ''],
+        ['14. Conveying Systems', '', '', '', '', '', ''],
+        ['15. Mechanical', '', '', '', '', '', ''],
+        ['16. Electrical', '', '', '', '', '', ''],
+        ['17. Materials Stored', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['TOTALS', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['Less Retention (___%)', '', '', '', '', '', ''],
+        ['Net Amount', '', '', '', '', '', ''],
+        ['Less Previous Payments', '', '', '', '', '', ''],
+        ['AMOUNT DUE THIS APPLICATION', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['CERTIFICATION', '', '', '', '', '', ''],
+        ['The undersigned Subcontractor certifies that to the best of the Subcontractor\'s knowledge, information, and belief, the Work covered by this Application for Payment has been completed in accordance with the Contract Documents.', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['Subcontractor:', '', '', 'Date:', '', '', ''],
+        ['By:', '', '', 'Title:', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['GENERAL CONTRACTOR APPROVAL', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['General Contractor:', '', '', 'Date:', '', '', ''],
+        ['By:', '', '', 'Title:', '', '', '']
+    ]
+    
+    # Add the data to the worksheet
+    for r_idx, row in enumerate(application_data, 1):
+        for c_idx, value in enumerate(row, 1):
+            ws.cell(row=r_idx, column=c_idx, value=value)
+    
+    # Set column widths
+    column_widths = [25, 15, 15, 20, 15, 15, 15]
+    for i, width in enumerate(column_widths, 1):
+        ws.column_dimensions[get_column_letter(i)].width = width
+    
+    # Set merged cells for headers
+    ws.merge_cells('A1:G1')  # Title
+    ws.merge_cells('A12:G12')  # Payment Application Summary
+    ws.merge_cells('A40:G40')  # Certification text
+    ws.merge_cells('B4:C4')  # Project Address
+    ws.merge_cells('B7:C7')  # Subcontractor Address
+    
+    # Apply some formatting
+    title_cell = ws['A1']
+    title_cell.font = Font(bold=True, size=14)
+    title_cell.alignment = Alignment(horizontal='center')
+    
+    summary_cell = ws['A12']
+    summary_cell.font = Font(bold=True)
+    summary_cell.alignment = Alignment(horizontal='center')
+    
+    # ========== LIEN WAIVER SHEET ==========
+    ws = wb.create_sheet("Lien Waiver")
+    
+    lien_waiver_data = [
+        ['CONDITIONAL WAIVER AND RELEASE OF LIENS', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['Project Name:', '', '', '', ''],
+        ['Project Address:', '', '', '', ''],
+        ['Subcontractor:', '', '', '', ''],
+        ['Invoice/Pay App #:', '', '', '', ''],
+        ['Payment Amount:', '$', '', '', ''],
+        ['', '', '', '', ''],
+        ['CONDITIONAL WAIVER AND RELEASE', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['Upon receipt of payment of the sum of $____________, the undersigned hereby waives and releases any and all rights to a mechanics lien, stop notice, or any right against a labor and material bond on the job, with respect to and on account of labor, services, equipment, or material furnished to the above referenced project through the date of ____________, except for disputed claims specifically described as follows:', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['Disputed Claims (if any):', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['This release covers a progress payment for work performed through the above date only and does not cover any retention, pending modifications and changes, or items furnished after that date.', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['NOTICE: THIS DOCUMENT WAIVES RIGHTS UNCONDITIONALLY AND STATES THAT YOU HAVE BEEN PAID FOR GIVING UP THOSE RIGHTS. THIS DOCUMENT IS ENFORCEABLE AGAINST YOU IF YOU SIGN IT, EVEN IF YOU HAVE NOT BEEN PAID. IF YOU HAVE NOT BEEN PAID, USE A CONDITIONAL RELEASE FORM.', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['Subcontractor:', '', '', '', ''],
+        ['By:', '', '', 'Title:', ''],
+        ['', '', '', '', ''],
+        ['Date:', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['State of:', '', '', '', ''],
+        ['County of:', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['On this ____ day of ____________, 20____, before me, the undersigned, a Notary Public in and for said State, personally appeared ________________________, known to me to be the person who executed the foregoing instrument.', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['Notary Public:', '', '', '', ''],
+        ['My Commission Expires:', '', '', '', '']
+    ]
+    
+    # Add the data to the worksheet
+    for r_idx, row in enumerate(lien_waiver_data, 1):
+        for c_idx, value in enumerate(row, 1):
+            ws.cell(row=r_idx, column=c_idx, value=value)
+    
+    # Set column widths
+    column_widths = [25, 15, 15, 15, 15]
+    for i, width in enumerate(column_widths, 1):
+        ws.column_dimensions[get_column_letter(i)].width = width
+    
+    # Set merged cells for headers and paragraphs
+    ws.merge_cells('A1:E1')  # Title
+    ws.merge_cells('A9:E9')  # Conditional Waiver and Release
+    ws.merge_cells('A11:E11')  # Waiver text
+    ws.merge_cells('A17:E17')  # Progress payment text
+    ws.merge_cells('A19:E19')  # Notice text
+    ws.merge_cells('A29:E29')  # Notary text
+    
+    # Apply formatting
+    title_cell = ws['A1']
+    title_cell.font = Font(bold=True, size=14)
+    title_cell.alignment = Alignment(horizontal='center')
+    
+    # ========== TAX FORMS SHEET ==========
+    ws = wb.create_sheet("Tax Forms")
+    
+    tax_forms_data = [
+        ['TAX FORMS CHECKLIST', '', '', ''],
+        ['', '', '', ''],
+        ['Subcontractor Name:', '', '', ''],
+        ['Federal Tax ID (EIN):', '', '', ''],
+        ['', '', '', ''],
+        ['FORM VERIFICATION', 'FORM NUMBER', 'INCLUDED', 'EXPIRATION'],
+        ['Federal W-9', 'IRS Form W-9', '', ''],
+        ['State Tax Registration', '', '', ''],
+        ['Local Business License', '', '', ''],
+        ['Sales Tax Certificate', '', '', ''],
+        ['Use Tax Declaration', '', '', ''],
+        ['Workers Comp Exemption (if applicable)', '', '', ''],
+        ['1099 Information (if applicable)', '', '', ''],
+        ['State Contractor License', '', '', ''],
+        ['', '', '', ''],
+        ['NOTES:', '', '', ''],
+        ['1. All tax forms must be current and valid for the contract period', '', '', ''],
+        ['2. Any changes to tax status must be reported immediately', '', '', ''],
+        ['3. Missing or expired tax forms may result in payment delays', '', '', ''],
+        ['4. Federal W-9 must be updated annually', '', '', ''],
+        ['', '', '', ''],
+        ['CERTIFICATION', '', '', ''],
+        ['', '', '', ''],
+        ['I certify that all tax information provided is accurate and complete.', '', '', ''],
+        ['', '', '', ''],
+        ['Signature:', '', '', ''],
+        ['Name (Print):', '', '', ''],
+        ['Title:', '', '', ''],
+        ['Date:', '', '', '']
+    ]
+    
+    # Add the data to the worksheet
+    for r_idx, row in enumerate(tax_forms_data, 1):
+        for c_idx, value in enumerate(row, 1):
+            ws.cell(row=r_idx, column=c_idx, value=value)
+    
+    # Set column widths
+    column_widths = [30, 20, 15, 15]
+    for i, width in enumerate(column_widths, 1):
+        ws.column_dimensions[get_column_letter(i)].width = width
+    
+    # Set merged cells for headers
+    ws.merge_cells('A1:D1')  # Title
+    ws.merge_cells('A22:D22')  # Certification
+    ws.merge_cells('A24:D24')  # Certification text
+    
+    # Apply formatting
+    title_cell = ws['A1']
+    title_cell.font = Font(bold=True, size=14)
+    title_cell.alignment = Alignment(horizontal='center')
+    
+    # ========== MATERIALS STORED SHEET ==========
+    ws = wb.create_sheet("Materials Stored")
+    
+    materials_stored_data = [
+        ['MATERIALS STORED ON SITE', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['Project Name:', '', '', 'Application No.:', '', '', ''],
+        ['Subcontractor:', '', '', 'Period Ending:', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['ITEM', 'DESCRIPTION', 'STORAGE LOCATION', 'DATE RECEIVED', 'QUANTITY', 'UNIT COST', 'TOTAL VALUE'],
+        ['1', '', '', '', '', '', ''],
+        ['2', '', '', '', '', '', ''],
+        ['3', '', '', '', '', '', ''],
+        ['4', '', '', '', '', '', ''],
+        ['5', '', '', '', '', '', ''],
+        ['6', '', '', '', '', '', ''],
+        ['7', '', '', '', '', '', ''],
+        ['8', '', '', '', '', '', ''],
+        ['9', '', '', '', '', '', ''],
+        ['10', '', '', '', '', '', ''],
+        ['11', '', '', '', '', '', ''],
+        ['12', '', '', '', '', '', ''],
+        ['13', '', '', '', '', '', ''],
+        ['14', '', '', '', '', '', ''],
+        ['15', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['TOTAL MATERIALS STORED', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['CERTIFICATION', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['The undersigned Subcontractor certifies that the materials listed above have been purchased, delivered, and properly stored on site, protected from weather and damage, and are covered by insurance. The materials have not been included in previous payment applications, and proof of purchase is attached.', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['Subcontractor:', '', '', 'Date:', '', '', ''],
+        ['By:', '', '', 'Title:', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['GENERAL CONTRACTOR VERIFICATION', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['The General Contractor confirms that the stored materials listed above have been verified for quantity and proper storage.', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', ''],
+        ['General Contractor:', '', '', 'Date:', '', '', ''],
+        ['By:', '', '', 'Title:', '', '', '']
+    ]
+    
+    # Add the data to the worksheet
+    for r_idx, row in enumerate(materials_stored_data, 1):
+        for c_idx, value in enumerate(row, 1):
+            ws.cell(row=r_idx, column=c_idx, value=value)
+    
+    # Set column widths
+    column_widths = [8, 25, 20, 15, 10, 10, 15]
+    for i, width in enumerate(column_widths, 1):
+        ws.column_dimensions[get_column_letter(i)].width = width
+    
+    # Set merged cells for headers
+    ws.merge_cells('A1:G1')  # Title
+    ws.merge_cells('A25:G25')  # Certification
+    ws.merge_cells('A27:G27')  # Certification text
+    ws.merge_cells('A32:G32')  # GC Verification
+    ws.merge_cells('A34:G34')  # GC Verification text
+    
+    # Apply formatting
+    title_cell = ws['A1']
+    title_cell.font = Font(bold=True, size=14)
+    title_cell.alignment = Alignment(horizontal='center')
+    
+    # ========== CERTIFIED PAYROLL SHEET ==========
+    ws = wb.create_sheet("Certified Payroll")
+    
+    # Use fewer columns for simplicity in the Python version
+    certified_payroll_data = [
+        ['CERTIFIED PAYROLL REPORT', '', '', '', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '', '', '', ''],
+        ['Project Name:', '', '', 'Payroll No.:', '', 'Week Ending:', '', '', ''],
+        ['Project Address:', '', '', 'Contract No.:', '', '', '', '', ''],
+        ['Subcontractor:', '', '', 'Federal ID No.:', '', '', '', '', ''],
+        ['Address:', '', '', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '', '', '', ''],
+        ['EMPLOYEE INFORMATION', 'HOURS WORKED EACH DAY', '', '', '', '', 'COMPENSATION', '', 'DEDUCTIONS', ''],
+        ['Name, Address, SSN (last 4)', 'Work Classification', 'S-M-T-W-T-F-S', 'Total Hours', 'Rate of Pay', 'Gross Amount', 'Federal Tax', 'State Tax', 'FICA', 'Net Pay'],
+        ['', '', '', '', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '', '', '', ''],
+        ['CERTIFICATION', '', '', '', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '', '', '', ''],
+        ['I, _________________________ (Name and Title), do hereby state:', '', '', '', '', '', '', '', '', ''],
+        ['(1) That I pay or supervise the payment of the persons employed by _________________________ (Subcontractor) on the _________________________ (Project); that during the payroll period commencing on the _____ day of _____________, 20___, and ending the _____ day of _____________, 20___, all persons employed on said project have been paid full weekly wages earned, that no rebates have been or will be made either directly or indirectly to or on behalf of said _________________________ (Subcontractor) from the full weekly wages earned by any person, and that no deductions have been made either directly or indirectly from the full wages earned by any person, other than permissible deductions as defined in applicable laws and regulations.', '', '', '', '', '', '', '', '', ''],
+        ['(2) That any payrolls otherwise under this contract required to be submitted for the above period are correct and complete; that the wage rates for laborers or mechanics contained therein are not less than the applicable wage rates contained in any wage determination incorporated into the contract; and that the classifications set forth therein for each laborer or mechanic conform with the work performed.', '', '', '', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '', '', '', ''],
+        ['I declare under penalty of perjury that the foregoing is true and correct.', '', '', '', '', '', '', '', '', ''],
+        ['', '', '', '', '', '', '', '', '', ''],
+        ['Signature:', '', '', 'Date:', '', '', '', '', '', '']
+    ]
+    
+    # Add the data to the worksheet
+    for r_idx, row in enumerate(certified_payroll_data, 1):
+        for c_idx, value in enumerate(row, 1):
+            ws.cell(row=r_idx, column=c_idx, value=value)
+    
+    # Set column widths for the simplified version
+    column_widths = [25, 20, 15, 10, 10, 12, 10, 10, 10, 10]
+    for i, width in enumerate(column_widths, 1):
+        ws.column_dimensions[get_column_letter(i)].width = width
+    
+    # Set merged cells for headers and paragraphs
+    ws.merge_cells('A1:J1')  # Title
+    ws.merge_cells('A22:J22')  # Certification
+    ws.merge_cells('A24:J24')  # Name and Title line
+    ws.merge_cells('A25:J25')  # Certification paragraph 1
+    ws.merge_cells('A26:J26')  # Certification paragraph 2
+    ws.merge_cells('A28:J28')  # Perjury statement
+    ws.merge_cells('B8:G8')    # Hours worked heading
+    ws.merge_cells('H8:H8')    # Compensation heading
+    ws.merge_cells('I8:J8')    # Deductions heading
+    
+    # Apply formatting
+    title_cell = ws['A1']
+    title_cell.font = Font(bold=True, size=14)
+    title_cell.alignment = Alignment(horizontal='center')
+    
+    # ========== INSURANCE CERTIFICATE SHEET ==========
+    ws = wb.create_sheet("Insurance Certificate")
+    
+    insurance_data = [
+        ['CERTIFICATE OF INSURANCE VERIFICATION', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['Subcontractor:', '', '', '', ''],
+        ['Project Name:', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['INSURANCE POLICY INFORMATION', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['INSURANCE TYPE', 'CARRIER', 'POLICY NUMBER', 'EXPIRATION DATE', 'COVERAGE LIMITS'],
+        ['Commercial General Liability', '', '', '', ''],
+        ['Workers Compensation', '', '', '', ''],
+        ['Employer\'s Liability', '', '', '', ''],
+        ['Automobile Liability', '', '', '', ''],
+        ['Umbrella/Excess Liability', '', '', '', ''],
+        ['Professional Liability (if applicable)', '', '', '', ''],
+        ['Pollution Liability (if applicable)', '', '', '', ''],
+        ['Builder\'s Risk (if applicable)', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['REQUIRED INSURANCE VERIFICATION', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['REQUIREMENT', 'MINIMUM REQUIRED', 'ACTUAL', 'COMPLIANT (Y/N)', 'NOTES'],
+        ['General Liability - Each Occurrence', '$1,000,000', '', '', ''],
+        ['General Liability - General Aggregate', '$2,000,000', '', '', ''],
+        ['General Liability - Products/Completed Ops', '$2,000,000', '', '', ''],
+        ['Auto Liability - Combined Single Limit', '$1,000,000', '', '', ''],
+        ['Workers Compensation', 'Statutory Limits', '', '', ''],
+        ['Employer\'s Liability', '$1,000,000', '', '', ''],
+        ['Umbrella/Excess Liability', '$5,000,000', '', '', ''],
+        ['', '', '', '', ''],
+        ['ADDITIONAL INSURED VERIFICATION', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['The following parties are listed as Additional Insured on the General Liability policy:', '', '', '', ''],
+        ['1. General Contractor:', '', '', '', ''],
+        ['2. Owner:', '', '', '', ''],
+        ['3. Architect/Engineer:', '', '', '', ''],
+        ['4. Others (as required):', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['WAIVER OF SUBROGATION', '', '', '', ''],
+        ['Waiver of Subrogation provided in favor of Additional Insureds?', 'YES / NO', '', '', ''],
+        ['', '', '', '', ''],
+        ['PRIMARY & NON-CONTRIBUTORY', '', '', '', ''],
+        ['Coverage is Primary & Non-Contributory?', 'YES / NO', '', '', ''],
+        ['', '', '', '', ''],
+        ['NOTICE OF CANCELLATION', '', '', '', ''],
+        ['30-day Notice of Cancellation provided?', 'YES / NO', '', '', ''],
+        ['', '', '', '', ''],
+        ['VERIFICATION', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['I have reviewed the above insurance requirements and verify that all requirements have been met.', '', '', '', ''],
+        ['', '', '', '', ''],
+        ['Certificate Attached?', 'YES / NO', '', '', ''],
+        ['', '', '', '', ''],
+        ['Verified By:', '', '', '', ''],
+        ['Title:', '', '', '', ''],
+        ['Date:', '', '', '', '']
+    ]
+    
+    # Add the data to the worksheet
+    for r_idx, row in enumerate(insurance_data, 1):
+        for c_idx, value in enumerate(row, 1):
+            ws.cell(row=r_idx, column=c_idx, value=value)
+    
+    # Set column widths
+    column_widths = [30, 20, 20, 15, 20]
+    for i, width in enumerate(column_widths, 1):
+        ws.column_dimensions[get_column_letter(i)].width = width
+    
+    # Set merged cells for headers
+    ws.merge_cells('A1:E1')  # Title
+    ws.merge_cells('A6:E6')  # Insurance Policy Information
+    ws.merge_cells('A18:E18')  # Required Insurance Verification
+    ws.merge_cells('A29:E29')  # Additional Insured Verification
+    ws.merge_cells('A31:E31')  # Additional Insured text
+    ws.merge_cells('A37:E37')  # Waiver of Subrogation
+    ws.merge_cells('A40:E40')  # Primary & Non-Contributory
+    ws.merge_cells('A43:E43')  # Notice of Cancellation
+    ws.merge_cells('A46:E46')  # Verification
+    ws.merge_cells('A48:E48')  # Verification text
+    
+    # Apply formatting
+    title_cell = ws['A1']
+    title_cell.font = Font(bold=True, size=14)
+    title_cell.alignment = Alignment(horizontal='center')
+    
+    # Save the workbook
+    filename = "Subcontractor_Payment_Application.xlsx"
+    wb.save(filename)
+    print(f"Excel file '{filename}' created successfully!")
+    
+    return filename
+
+
+if __name__ == "__main__":
+    create_subcontractor_payment_app()
